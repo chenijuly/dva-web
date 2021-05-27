@@ -1,4 +1,5 @@
 import fetch from 'dva/fetch';
+import { Modal } from 'antd'
 
 function parseJSON(response) {
   return response.json();
@@ -8,6 +9,16 @@ function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
+  if (response.status === 401 ) {
+    Modal.warning({
+      title: '会话过期',
+      content: '会话已过期，请重新登录',
+      onOk () {
+        window.location.href = `${process.env.FRONTEND_WEB}/login?redirectUrl=${window.location.href}`
+      },
+    })
+  }
+
 
   const error = new Error(response.statusText);
   error.response = response;

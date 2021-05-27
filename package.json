@@ -14,7 +14,9 @@
     "precommit:fix": "npm run lint:fix && npm run prettier && npm run lint:prettier && npm run lint:style"
   },
   "dependencies": {
+    "antd": "^4.16.0",
     "dva": "^2.4.1",
+    "history": "^5.0.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
