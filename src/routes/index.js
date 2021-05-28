@@ -1,24 +1,32 @@
-import IndexPage from '../pages/index-page/index';
-import Test from '../pages/test/index'
+const BasicLayout = () => import('../layouts/BasicLayout');
+const IndexPage = () => import('../pages/index-page/index');
+const Test = () => import ('../pages/test/index');
+
 const routes = [
   {
-    path: '',
-    component: IndexPage
-  },
-  {
     path: '/',
-    component: IndexPage
+    component: BasicLayout,
+    models: () => [
+      import('../models/user')
+    ],
+    children: [{
+      path: '/',
+      component: IndexPage,
+    }, {
+      path: '/aa',
+      component: Test,
+    }]
   },
   {
     path: '/test',
     component: Test,
-    childrem: [
+    children: [
       {
-        path: '/:id',
-        component: IndexPage
+        path: '/a',
+        component: IndexPage,
       },
-    ]
-  }
-]
+    ],
+  },
+];
 
-export default routes
+export default routes;
